@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 FW1="NP3020M7-C252_BIOS_02.02.00_Standard_20220906.ROM"
 FW2="NP3020M7-C252_BIOS_02.02.00_Standard_20220906.ROM"
@@ -14,9 +15,8 @@ fi
 
 count=$(tail count.txt)
 
-
-
 if [ $(($count%2)) -eq 0 ];then
+	
 	incount=$(($count+1))
 	echo "Round : $incount" | tee -a log.txt
 	echo  $today  >> log.txt
@@ -25,7 +25,7 @@ if [ $(($count%2)) -eq 0 ];then
 	BIOSVersion=$(sudo dmidecode -s bios-version)
 	echo  "BIOSVersion: "  $BIOSVersion  >> log.txt
 	echo $incount > count.txt
-	echo "FW1 Flash Successfully!!"
+	# echo "FW1 Flash Successfully!!"
 	echo "BIOSVersion: "  $BIOSVersion
 	init 6
 	echo  "----------------------------------"  >> log.txt
@@ -40,7 +40,7 @@ elif [ $(($count%2)) -eq 1 ] ;then
 	BIOSVersion=$(sudo dmidecode -s bios-version)
 	echo  "BIOSVersion: "  $BIOSVersion  >> log.txt
 	echo $incount > count.txt
-	echo "FW2 Flash Successfully!!"
+	# echo "FW2 Flash Successfully!!"
 	echo "BIOSVersion: "  $BIOSVersion
 	init 6
 	echo  "----------------------------------"  >> log.txt
