@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-FW1="NP3020M7-C252_BIOS_02.02.00_Standard_20220906.ROM"
-FW2="NP3020M7-C252_BIOS_02.02.00_Standard_20220906.ROM"
+FW1="../NP3020M7-C252_BIOS_02.02.00_Standard_20220906.ROM"
+FW2="../NP3020M7-C252_BIOS_02.02.00_Standard_20220906.ROM"
 
 today=$(date)
 
@@ -18,9 +18,9 @@ count=$(tail count.txt)
 if [ $(($count%2)) -eq 0 ];then
 	
 	incount=$(($count+1))
-	echo "Round : $incount" | tee -a log.txt
+	echo "Count : $incount" | tee -a log.txt
 	echo  $today  >> log.txt
-	echo  $(./afulnx_64 ../$FW1 /P /B /N /R)  | tee -a log.txt
+	echo  $(./afulnx_64 $FW1 /P /B /N /R)  | tee -a log.txt
 	# echo    $(ls)  | tee -a log.txt
 	BIOSVersion=$(sudo dmidecode -s bios-version)
 	echo  "BIOSVersion: "  $BIOSVersion  >> log.txt
@@ -33,9 +33,9 @@ if [ $(($count%2)) -eq 0 ];then
 
 elif [ $(($count%2)) -eq 1 ] ;then
 	incount=$(($count+1))
-	echo "Round : $incount" | tee -a log.txt
+	echo "Count : $incount" | tee -a log.txt
 	echo  $today  >> log.txt
-	echo  $(./afulnx_64 ../$FW2 /P /B /N /R)  | tee -a log.txt
+	echo  $(./afulnx_64 $FW2 /P /B /N /R)  | tee -a log.txt
 	# echo    $(ls)  | tee -a log.txt
 	BIOSVersion=$(sudo dmidecode -s bios-version)
 	echo  "BIOSVersion: "  $BIOSVersion  >> log.txt
